@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EscalatorManager : MonoBehaviour
+public class EscalatorActor : MonoBehaviour
 {
     // Debug Purposes
     [Range(0f,1f)]
@@ -11,6 +11,8 @@ public class EscalatorManager : MonoBehaviour
     public bool isActive = false;
     private Animator _anim;
     private string ESCALATOR_ANIMATION_NAME = "EscalatorExpand";
+
+    private string TARGET_TAG = "EscalatorFollowTarget";
     
     
     // Start is called before the first frame update
@@ -26,5 +28,20 @@ public class EscalatorManager : MonoBehaviour
         {
             _anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
         }
+    }
+    
+ 
+    public Transform GetTargetObject()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            if (child.tag == TARGET_TAG)
+            {
+                return child;
+            }
+        }
+
+        return null;
     }
 }
