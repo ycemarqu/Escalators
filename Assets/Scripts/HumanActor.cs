@@ -2,27 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class HumanActor : MonoBehaviour
 {
+    
+    
     private Transform firstTarget;
+
+    private CharacterController _characterController;
     // Start is called before the first frame update
     void Start()
     {
-        DOTween.Init();
-        
-        var firstEscalator = GameplayManager.Instance.EscalatorsInOrder[0];
-        if (firstEscalator == null)
-        {
-            Debug.LogError("Couldn't find First Escalator ");
-        }
-        firstTarget = firstEscalator.GetComponent<EscalatorActor>().GetTargetObject().transform;
+        _characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (firstTarget == null) return;
-            transform.DOMove(firstTarget.position,1f);
+        _characterController.SimpleMove((transform.right) * GameplayManager.Instance.humanSpeed);
     }
 }

@@ -7,6 +7,9 @@ public class GameplayManager : MonoBehaviour
 {
     public GameObject[] EscalatorsInOrder;
     
+    // Adjust the speed for the application.
+    public float humanSpeed;
+    
     private static GameplayManager instance = null;
     // Game Instance Singleton
     public static GameplayManager Instance
