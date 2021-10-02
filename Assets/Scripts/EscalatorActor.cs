@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +12,11 @@ public class EscalatorActor : MonoBehaviour
     public bool isActive = false;
     private Animator _anim;
     private string ESCALATOR_ANIMATION_NAME = "EscalatorExpand";
+    private int _insideHumanCount = 0;
+    
+    private static readonly int DoorOpen = Animator.StringToHash("DoorOpen");
 
-    private string TARGET_TAG = "EscalatorFollowTarget";
+    // private string TARGET_TAG = "EscalatorFollowTarget";
     
     
     // Start is called before the first frame update
@@ -24,24 +28,60 @@ public class EscalatorActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Activate Escalator
+        if (!isActive && _insideHumanCount > 0) isActive = true;
+        
         if (isActive)
         {
-            _anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
-        }
-    }
-    
- 
-    public Transform GetTargetObject()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Transform child = transform.GetChild(i);
-            if (child.tag == TARGET_TAG)
-            {
-                return child;
-            }
-        }
+            // TODO use this to control escalator expanding
+             _anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
 
-        return null;
+            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                _anim.SetBool(DoorOpen, true);
+            }
+            
+            else 
+            {
+                _anim.SetBool(DoorOpen, false);
+            }
+            
+            // Deactivate Escalator
+            if (_insideHumanCount == 0) isActive = false;
+        }
+        
+        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Human"))
+        {
+            _insideHumanCount++;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Human"))
+        {
+            _insideHumanCount--;
+        }
+    }
+
+
+    // public Transform GetTargetObject()
+    // {
+    //     for (int i = 0; i < transform.childCount; i++)
+    //     {
+    //         Transform child = transform.GetChild(i);
+    //         if (child.tag == TARGET_TAG)
+    //         {
+    //             return child;
+    //         }
+    //     }
+    //
+    //     return null;
+    // }
 }

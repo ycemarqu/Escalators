@@ -431,11 +431,11 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 4.512821
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.7
+  m_Radius: 1
+  m_SlopeLimit: 0
+  m_StepOffset: 0.4
   m_SkinWidth: 0.1
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: -0.2, y: -1.54, z: 0.4}
 --- !u!114 &-2870107280769910897
 MonoBehaviour:
@@ -449,4 +449,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b4f6d118cae5a479018c890f9e98f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
