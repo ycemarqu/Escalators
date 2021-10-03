@@ -34,7 +34,7 @@ public class EscalatorActor : MonoBehaviour
         if (isActive)
         {
             // TODO use this to control escalator expanding
-             _anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
+            //_anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
 
             
             if (Input.GetKey(KeyCode.Space))
