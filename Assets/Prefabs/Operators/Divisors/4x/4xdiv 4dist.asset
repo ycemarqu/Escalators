@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   operatorType: 1
   amount: 4
-  size: 4
+  size: 2

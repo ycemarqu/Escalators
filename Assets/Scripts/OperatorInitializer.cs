@@ -35,12 +35,12 @@ public class OperatorInitializer : MonoBehaviour
         string textRep;
         if (_operator.operatorType == OperatorType.Multiplier)
         {
-            setMaterial(new Color(0, 0, 1, 0.33f));
+            setMaterial(new Color(0, 0, 1, 0.2f));
             textRep = "x";
         }
         else
         {
-            setMaterial(new Color(1, 0, 0, 0.33f));
+            setMaterial(new Color(1, 0, 0, 0.2f));
             textRep = "÷";
         }
 
