@@ -10,6 +10,7 @@ TagManager:
   - AnimationEndZone
   - Operator
   - Car
+  - Boat
   layers:
   - Default
   - TransparentFX

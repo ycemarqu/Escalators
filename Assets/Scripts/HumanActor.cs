@@ -22,4 +22,9 @@ public class HumanActor : MonoBehaviour
     {
         _characterController.SimpleMove((transform.right) * GameplayManager.Instance.humanSpeed);
     }
+
+    public void Kill()
+    {
+        Destroy(this.gameObject);
+    }
 }

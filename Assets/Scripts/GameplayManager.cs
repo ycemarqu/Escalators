@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
-    public GameObject[] EscalatorsInOrder;
-    
     // Adjust the speed for the application.
     public float humanSpeed;
+
+    public GameObject[] phasesInOrder;
     
+
+    #region Singleton
+
     private static GameplayManager instance = null;
     // Game Instance Singleton
     public static GameplayManager Instance
@@ -20,6 +23,8 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    #endregion
+    
     private void Awake()
     {
         instance = this;
