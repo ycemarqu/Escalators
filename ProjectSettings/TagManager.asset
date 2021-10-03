@@ -8,6 +8,8 @@ TagManager:
   - Human
   - EscalatorFollowTarget
   - AnimationEndZone
+  - Operator
+  - Car
   layers:
   - Default
   - TransparentFX
