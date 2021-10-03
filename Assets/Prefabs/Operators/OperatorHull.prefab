@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 7440401514035881836}
   - component: {fileID: 7500330433700583698}
   - component: {fileID: 5465850450010501590}
+  - component: {fileID: 6388364001956194433}
   m_Layer: 0
   m_Name: OperatorHull
   m_TagString: Operator
@@ -258,6 +259,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.188135, y: 1.9999628, z: 0.24593067}
   m_Center: {x: 1.103682, y: -1.580792, z: 1.1706095}
+--- !u!114 &6388364001956194433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3730881629369639450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e105eca3e0639b44e99d31613ed61525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5161179014625993850
 GameObject:
   m_ObjectHideFlags: 0

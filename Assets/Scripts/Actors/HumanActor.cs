@@ -6,8 +6,6 @@ using UnityEngine.UIElements;
 
 public class HumanActor : MonoBehaviour
 {
-    
-    
     private Transform firstTarget;
 
     private CharacterController _characterController;
@@ -25,6 +23,7 @@ public class HumanActor : MonoBehaviour
 
     public void Kill()
     {
+        GameplayManager.Instance._humanCount--;
         Destroy(this.gameObject);
     }
 }

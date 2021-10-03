@@ -9,6 +9,9 @@ public class GameplayManager : MonoBehaviour
     public float humanSpeed;
 
     public GameObject[] phasesInOrder;
+
+    
+    public int _humanCount = 0;
     
 
     #region Singleton
@@ -33,7 +36,8 @@ public class GameplayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _humanCount = GameObject.FindGameObjectsWithTag("Human").Length;
+        Debug.Log($"Human Count is:{_humanCount}");
     }
 
     // Update is called once per frame
