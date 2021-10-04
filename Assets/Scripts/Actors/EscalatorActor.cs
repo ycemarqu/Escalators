@@ -15,6 +15,7 @@ public class EscalatorActor : MonoBehaviour
     private Animator _anim;
     private string ESCALATOR_ANIMATION_NAME = "EscalatorExpand";
     private int _insideHumanCount = 0;
+    private int _sentHumanCount = 0;
     
     private static readonly int DoorOpen = Animator.StringToHash("DoorOpen");
 
@@ -30,23 +31,18 @@ public class EscalatorActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Activate Escalator
-        if (!isActive && _insideHumanCount > 0) isActive = true;
+        // Activate Escalator if everyone is inside
+        if (!isActive && _insideHumanCount == GameplayManager.Instance._humanCount) isActive = true;
         
         if (isActive)
         {
-            foreach (var escalator in GameplayManager.Instance.escalatorsInOrder)
-            {
-                if (escalator != this.gameObject && escalator.GetComponent<EscalatorActor>().isActive)
-                    return;
-                else break;
-            }
+            // if (_insideHumanCount == GameplayManager.Instance._humanCount)
+            // {
+            //     animationPercentage += 0.1f;
+            //     _anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
+            // }
 
-            
-            // TODO use this to control escalator expanding
-            //_anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
 
-            
             if (Input.GetKey(KeyCode.Space))
             {
                 _anim.SetBool(DoorOpen, true);
@@ -60,8 +56,6 @@ public class EscalatorActor : MonoBehaviour
             // Deactivate Escalator
             if (_insideHumanCount == 0) Deactivate();
         }
-        
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -77,6 +71,7 @@ public class EscalatorActor : MonoBehaviour
         if (other.CompareTag("Human"))
         {
             _insideHumanCount--;
+            _sentHumanCount++;
         }
     }
 

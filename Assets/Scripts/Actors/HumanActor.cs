@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class HumanActor : MonoBehaviour
 {
-    
+    public bool isActive = true;
     private Transform firstTarget;
     private bool _createdThisTurn = false;
     private CharacterController _characterController;
@@ -19,7 +19,8 @@ public class HumanActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _characterController.SimpleMove((transform.right) * GameplayManager.Instance.humanSpeed);
+        if(isActive)
+            _characterController.SimpleMove((transform.right) * GameplayManager.Instance.humanSpeed);
     }
 
     public void Kill()
