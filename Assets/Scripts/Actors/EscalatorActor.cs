@@ -18,11 +18,7 @@ public class EscalatorActor : MonoBehaviour
     private int _sentHumanCount = 0;
     
     private static readonly int DoorOpen = Animator.StringToHash("DoorOpen");
-
-    // private string TARGET_TAG = "EscalatorFollowTarget";
     
-    
-    // Start is called before the first frame update
     void Start()
     {
         _anim = GetComponent<Animator>();
@@ -36,6 +32,7 @@ public class EscalatorActor : MonoBehaviour
         
         if (isActive)
         {
+            //TODO use this to achieve expansion of escalators
             // if (_insideHumanCount == GameplayManager.Instance._humanCount)
             // {
             //     animationPercentage += 0.1f;
@@ -80,19 +77,4 @@ public class EscalatorActor : MonoBehaviour
         isActive = false;
         DeactivateEscalator?.Invoke();
     }
-
-
-    // public Transform GetTargetObject()
-    // {
-    //     for (int i = 0; i < transform.childCount; i++)
-    //     {
-    //         Transform child = transform.GetChild(i);
-    //         if (child.tag == TARGET_TAG)
-    //         {
-    //             return child;
-    //         }
-    //     }
-    //
-    //     return null;
-    // }
 }
