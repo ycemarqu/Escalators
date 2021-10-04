@@ -15,25 +15,24 @@ public class OperatorActor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Human"))
+        if (!other.CompareTag("Human")) return;
+        
+        if (_op.operatorType == OperatorType.Divisor)
         {
-            if (_op.operatorType == OperatorType.Divisor)
+            if (_divisionCounter == _op.amount)
             {
-                if (_divisionCounter == _op.amount)
-                {
-                    _divisionCounter = 1;
-                }
-                else
-                {
-                    other.GetComponent<HumanActor>().Kill();
-                    _divisionCounter++;
-                }
+                _divisionCounter = 1;
             }
             else
             {
-                Debug.Log("Multiplier");
-            } 
+                other.GetComponent<HumanActor>().Kill();
+                _divisionCounter++;
+            }
         }
-        
+        else
+        {
+            other.GetComponent<HumanActor>().Multiply(_op.amount);
+        }
+
     }
 }

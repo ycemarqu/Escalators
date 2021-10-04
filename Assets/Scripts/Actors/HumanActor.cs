@@ -6,8 +6,9 @@ using UnityEngine.UIElements;
 
 public class HumanActor : MonoBehaviour
 {
+    
     private Transform firstTarget;
-
+    private bool _createdThisTurn = false;
     private CharacterController _characterController;
     // Start is called before the first frame update
     void Start()
@@ -25,5 +26,20 @@ public class HumanActor : MonoBehaviour
     {
         GameplayManager.Instance._humanCount--;
         Destroy(this.gameObject);
+    }
+
+    public void Multiply(int amount)
+    {
+        if (_createdThisTurn) return;
+        GameplayManager.Instance._humanCount += amount-1;
+        
+        for (int i = 0; i < amount-1; i++)
+        {
+            var newHuman = ObjectPool._pool.Dequeue();
+            var pos = transform.position;
+            newHuman.transform.position = new Vector3(pos.x - 0.1f, pos.y, pos.z);
+            newHuman.SetActive(true);
+            newHuman.GetComponent<HumanActor>()._createdThisTurn = true;
+        }
     }
 }

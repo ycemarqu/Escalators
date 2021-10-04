@@ -9,14 +9,19 @@ public class GameplayManager : MonoBehaviour
     public float humanSpeed;
 
     public GameObject[] phasesInOrder;
+    public GameObject[] escalatorsInOrder;
+    public Camera mainCamera;
 
     
-    public int _humanCount = 0;
-    
+    [NonSerialized]public int _humanCount = 0;
+    [NonSerialized]public int CurrentPhase = 1;
 
     #region Singleton
 
     private static GameplayManager instance = null;
+
+    private CameraController _cameraController;
+
     // Game Instance Singleton
     public static GameplayManager Instance
     {
@@ -30,19 +35,23 @@ public class GameplayManager : MonoBehaviour
     
     private void Awake()
     {
+        _cameraController = mainCamera.GetComponent<CameraController>();
+        _humanCount = GameObject.FindGameObjectsWithTag("Human").Length;
         instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _humanCount = GameObject.FindGameObjectsWithTag("Human").Length;
-        Debug.Log($"Human Count is:{_humanCount}");
+        EscalatorActor.DeactivateEscalator += IncrementCurrentPhase;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void IncrementCurrentPhase()
     {
-        
+        if (CurrentPhase < escalatorsInOrder.Length)
+        {
+            _cameraController.ChangeCameraLocation(escalatorsInOrder[CurrentPhase].transform.position);
+            CurrentPhase++;
+        }
     }
 }

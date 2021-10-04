@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EscalatorActor : MonoBehaviour
 {
+    public static event Action DeactivateEscalator;
+    
     // Debug Purposes
     [Range(0f,1f)]
     public float animationPercentage = 0f;
@@ -33,6 +35,13 @@ public class EscalatorActor : MonoBehaviour
         
         if (isActive)
         {
+            foreach (var escalator in GameplayManager.Instance.escalatorsInOrder)
+            {
+                if (escalator != this.gameObject && escalator.GetComponent<EscalatorActor>().isActive)
+                    return;
+            }
+
+            
             // TODO use this to control escalator expanding
             //_anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
 
@@ -48,7 +57,7 @@ public class EscalatorActor : MonoBehaviour
             }
             
             // Deactivate Escalator
-            if (_insideHumanCount == 0) isActive = false;
+            if (_insideHumanCount == 0) Deactivate();
         }
         
         
@@ -68,6 +77,12 @@ public class EscalatorActor : MonoBehaviour
         {
             _insideHumanCount--;
         }
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
+        DeactivateEscalator?.Invoke();
     }
 
 
