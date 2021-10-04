@@ -39,6 +39,7 @@ public class EscalatorActor : MonoBehaviour
             {
                 if (escalator != this.gameObject && escalator.GetComponent<EscalatorActor>().isActive)
                     return;
+                else break;
             }
 
             

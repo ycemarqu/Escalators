@@ -11,7 +11,7 @@ public class EndZoneActor : MonoBehaviour
         switch (other.tag)
         {
             case "Operator":
-                SliderManager.Instance.ResetObjectLocation(other.transform);
+                other.transform.GetComponentInParent<SliderManager>().ResetObjectLocation(other.transform);
                 break;
             case "Car":
                 other.gameObject.SetActive(false);

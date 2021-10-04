@@ -50,7 +50,7 @@ public class GameplayManager : MonoBehaviour
     {
         if (CurrentPhase < escalatorsInOrder.Length)
         {
-            _cameraController.ChangeCameraLocation(escalatorsInOrder[CurrentPhase].transform.position);
+            StartCoroutine(_cameraController.ChangeCameraLocation(escalatorsInOrder[CurrentPhase].transform.position));
             CurrentPhase++;
         }
     }

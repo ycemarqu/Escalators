@@ -14,8 +14,9 @@ public class CameraController : MonoBehaviour
         //EscalatorActor.DeactivateEscalator += ChangeCameraLocation;
     }
 
-    public void ChangeCameraLocation(Vector3 nextEscalatorPos)
+    public IEnumerator ChangeCameraLocation(Vector3 nextEscalatorPos)
     {
+        yield return new WaitForSeconds(1);
         transform.position = _cameraOffset + nextEscalatorPos;
     }
 }
