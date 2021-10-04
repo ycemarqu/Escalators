@@ -1,2 +1,2 @@
 # Escalators
-Prototype replica of the game escalators
+Prototype replica of the game "Escalators"
