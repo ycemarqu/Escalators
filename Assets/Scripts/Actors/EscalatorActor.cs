@@ -34,7 +34,6 @@ public class EscalatorActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"{this} has {_insideHumanCount} humans");
         // Activate Escalator if everyone is inside
         if (!isActive && _insideHumanCount == GameplayManager.Instance._humanCount) isActive = true;
         

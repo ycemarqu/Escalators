@@ -46,11 +46,6 @@ public class GameplayManager : MonoBehaviour
         EscalatorActor.DeactivateEscalator += IncrementCurrentPhase;
     }
 
-    void Update()
-    {
-        Debug.Log($"There are {_humanCount} humans ingame");
-    }
-
     private void IncrementCurrentPhase()
     {
         if (CurrentPhase < escalatorsInOrder.Length)
