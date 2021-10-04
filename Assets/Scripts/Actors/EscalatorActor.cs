@@ -6,6 +6,7 @@ using UnityEngine;
 public class EscalatorActor : MonoBehaviour
 {
     public static event Action DeactivateEscalator;
+    public GameObject router;
     
     // Debug Purposes
     [Range(0f,1f)]
@@ -18,7 +19,13 @@ public class EscalatorActor : MonoBehaviour
     private int _sentHumanCount = 0;
     
     private static readonly int DoorOpen = Animator.StringToHash("DoorOpen");
-    
+    private WaitingCheck _waitingCheck;
+
+    private void Awake()
+    {
+        _waitingCheck = router.GetComponent<WaitingCheck>();
+    }
+
     void Start()
     {
         _anim = GetComponent<Animator>();
@@ -27,17 +34,17 @@ public class EscalatorActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($"{this} has {_insideHumanCount} humans");
         // Activate Escalator if everyone is inside
         if (!isActive && _insideHumanCount == GameplayManager.Instance._humanCount) isActive = true;
         
         if (isActive)
         {
-            //TODO use this to achieve expansion of escalators
-            // if (_insideHumanCount == GameplayManager.Instance._humanCount)
-            // {
-            //     animationPercentage += 0.1f;
-            //     _anim.Play(ESCALATOR_ANIMATION_NAME, 0, animationPercentage);
-            // }
+             if (_waitingCheck.isThereAnyoneWaiting)
+             {
+                 animationPercentage += 0.01f;
+                 _anim.Play(ESCALATOR_ANIMATION_NAME, 1, animationPercentage);
+             }
 
 
             if (Input.GetKey(KeyCode.Space))

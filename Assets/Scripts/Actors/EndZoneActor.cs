@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EndZoneActor : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EndZoneActor : MonoBehaviour
                 break;
             case "Boat":
                 ResetObjectLocation(other.transform);
+                DeleteEveryHumanInside(other.transform);
                 break;
             default:
                 break;
@@ -25,7 +27,17 @@ public class EndZoneActor : MonoBehaviour
         }
         
     }
-    
+
+    private void DeleteEveryHumanInside(Transform boat)
+    {
+        for (int i = 0; i < boat.childCount; i++)
+        {
+            var child = boat.GetChild(i);
+            if(child.CompareTag("Human"))
+                child.gameObject.GetComponent<HumanActor>().Kill();
+        }
+    }
+
     public void ResetObjectLocation(Transform obj)
     {
         var temp = obj.position;
